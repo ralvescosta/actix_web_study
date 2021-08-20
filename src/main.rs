@@ -1,10 +1,17 @@
 //async,await / paralelismo / Actor model
-use actix_web::{middleware, web, App, HttpServer, Responder};
+mod application;
+mod controller;
+mod routes;
+mod something_dto;
+mod something_entity;
+
+use actix_web::{get, middleware, App, HttpResponse, HttpServer, Responder};
 use env_logger;
 use std::io::Result;
 
-async fn status() -> impl Responder {
-    "{\"status\": \"UP\"}"
+#[get("/hi")]
+async fn index() -> impl Responder {
+    HttpResponse::Ok().body("Hello sunshine!")
 }
 
 #[actix_web::main]
@@ -15,7 +22,7 @@ async fn main() -> Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
-            .route("/", web::get().to(status))
+            .service(index)
     })
     .bind("127.0.0.1:3000")?
     .run()

@@ -291,6 +291,8 @@ dependencies = [
  "actix-rt 2.2.0",
  "actix-web",
  "env_logger",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
