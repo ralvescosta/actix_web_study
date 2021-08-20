@@ -19,10 +19,15 @@ async fn main() -> Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
+    let usecase = crate::application::SomethingUseCase::new();
+    let controller = crate::controller::SomethingController::new(usecase);
+    let route = crate::routes::SomethingRoutes::new(controller);
+
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
             .service(index)
+            .configure(route.something_routes())
     })
     .bind("127.0.0.1:3000")?
     .run()
