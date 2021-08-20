@@ -1,5 +1,7 @@
-pub struct SomethingEntity {
-    pub id: u32,
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+pub struct SomethingModel {
     pub name: String,
     pub number: i32,
     pub alias: String,
