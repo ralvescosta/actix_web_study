@@ -2,6 +2,7 @@
 mod applications;
 mod controllers;
 mod models;
+mod routes;
 
 use actix_web::{middleware, App, HttpServer};
 use env_logger;
@@ -15,7 +16,8 @@ async fn main() -> Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
-            .service(controllers::something::index)
+            // .service(controllers::something::index)
+            .configure(routes::something::routes())
     })
     .bind("127.0.0.1:3000")?
     .run()
