@@ -1,18 +1,14 @@
-use crate::{applications::something::SomethingUseCase, models::something::SomethingModel};
-use actix_web::{get, web, HttpResponse, Responder};
-// use futures::{future::result, Future};
+use actix_web::{get, HttpResponse, Responder};
 
-// #[get("/hi")]
-// async fn index() -> impl Responder {
-//     HttpResponse::Ok().body("Hello sunshine!")
-// }
+use crate::models::something::SomethingModel;
 
-pub struct SomethingController {
-    app: SomethingUseCase,
-}
-
-impl SomethingController {
-    // pub async fn index(&self) -> impl Future<Item = HttpResponse, Error = Error> {
-    //     |body| String::from("Oii, eu sou o Goku!")
-    // }
+#[get("/hi")]
+pub async fn index() -> impl Responder {
+    let result = crate::applications::something::perform(SomethingModel {
+        alias: String::from("Alias"),
+        href: String::from("Ref"),
+        name: String::from("Name"),
+        number: 16,
+    });
+    HttpResponse::Ok().json(result)
 }
