@@ -1,14 +1,15 @@
 use actix_web::{get, HttpResponse, Responder};
 
-use crate::models::something::SomethingModel;
+use crate::view_models::something::SomethingViewModel;
 
 #[get("/hi")]
 pub async fn index() -> impl Responder {
-    let result = crate::applications::something::perform(SomethingModel {
+    let result = crate::applications::something::perform(SomethingViewModel {
         alias: String::from("Alias"),
         href: String::from("Ref"),
         name: String::from("Name"),
         number: 16,
-    });
+    })
+    .await;
     HttpResponse::Ok().json(result)
 }

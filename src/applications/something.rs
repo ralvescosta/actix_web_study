@@ -1,23 +1,15 @@
-use models::something::SomethingModel;
-use serde::Serialize;
+use view_models::something::SomethingViewModel;
 
-use crate::models;
+use crate::{models::something::SomethingModel, view_models};
 
-pub fn perform(dto: SomethingModel) -> SomethingEntity {
-    return SomethingEntity {
+pub async fn perform(dto: SomethingViewModel) -> SomethingModel {
+    crate::repositories::something::get_somethings();
+
+    return SomethingModel {
         id: 1,
         alias: dto.alias,
         href: dto.href,
         name: dto.name,
         number: dto.number,
     };
-}
-
-#[derive(Serialize)]
-pub struct SomethingEntity {
-    pub id: u32,
-    pub name: String,
-    pub number: i32,
-    pub alias: String,
-    pub href: String,
 }

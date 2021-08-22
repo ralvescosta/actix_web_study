@@ -1,9 +1,16 @@
+#[macro_use]
+extern crate diesel;
+
 mod applications;
 mod controllers;
+mod database;
 mod models;
+mod repositories;
 mod routes;
+mod schema;
+mod view_models;
 
-use actix_web::{middleware, web, App, HttpServer};
+use actix_web::{middleware, App, HttpServer};
 use env_logger;
 use std::io::Result;
 
@@ -12,7 +19,7 @@ async fn main() -> Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
 
-    HttpServer::new(move || {
+    HttpServer::new(|| {
         App::new()
             .wrap(middleware::Logger::default())
             .configure(routes::something::register)
