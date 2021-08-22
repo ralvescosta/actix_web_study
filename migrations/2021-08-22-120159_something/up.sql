@@ -1,0 +1,8 @@
+-- Your SQL goes here
+CREATE TABLE something (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  'name' VARCHAR NOT NULL,
+  alias VARCHAR NOT NULL,
+  href VARCHAR NOT NULL,
+  'number' INT NOT NULL
+)
