@@ -10,11 +10,11 @@ mod routes;
 mod schema;
 mod view_models;
 
-use actix_web::{middleware, App, HttpServer};
+use actix_web::{middleware, web, App, HttpServer};
 use applications::something::SomethingUseCase;
 use env_logger;
 use repositories::something::SomethingRepository;
-use std::io::Result;
+use std::{io::Result, sync::Arc};
 
 #[actix_web::main]
 async fn main() -> Result<()> {
@@ -24,8 +24,9 @@ async fn main() -> Result<()> {
     HttpServer::new(|| {
         let something_repository = SomethingRepository::new();
         let something_application = SomethingUseCase::new(Box::new(something_repository));
+
         App::new()
-            .data(something_application)
+            .app_data(web::Data::new(Arc::new(something_application)))
             .wrap(middleware::Logger::default())
             .configure(routes::something::register)
     })
