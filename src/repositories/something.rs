@@ -35,3 +35,14 @@ pub fn create<'a>(name: &'a str, number: i32, alias: &'a str, href: &'a str) {
         .execute(&connection)
         .expect("Error saving new post");
 }
+
+#[derive(Debug, Clone, Copy)]
+pub struct SomethingRepository {}
+
+impl SomethingRepository {
+    pub fn new() -> SomethingRepository {
+        SomethingRepository {}
+    }
+
+    pub fn something(&self) {}
+}

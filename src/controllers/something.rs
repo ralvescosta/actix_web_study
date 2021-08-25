@@ -1,6 +1,8 @@
 use actix_web::{get, HttpResponse, Responder};
 
-use crate::view_models::something::SomethingViewModel;
+use crate::{
+    applications::something::SomethingUseCase, view_models::something::SomethingViewModel,
+};
 
 #[get("/hi")]
 pub async fn index() -> impl Responder {
@@ -11,5 +13,10 @@ pub async fn index() -> impl Responder {
         number: 16,
     })
     .await;
+    HttpResponse::Ok().json(result)
+}
+
+pub async fn something(usecase: &SomethingUseCase) -> impl Responder {
+    let result = usecase.perform().await;
     HttpResponse::Ok().json(result)
 }
