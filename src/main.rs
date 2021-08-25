@@ -10,7 +10,8 @@ mod routes;
 mod schema;
 mod view_models;
 
-use actix_web::{middleware, web, App, HttpServer};
+use actix_http::{Response, ResponseError};
+use actix_web::{error, middleware, web, App, HttpResponse, HttpServer};
 use applications::something::SomethingUseCase;
 use env_logger;
 use repositories::something::SomethingRepository;
@@ -28,6 +29,9 @@ async fn main() -> Result<()> {
         App::new()
             .app_data(web::Data::new(Arc::new(something_application)))
             .wrap(middleware::Logger::default())
+            .data(
+                web::JsonConfig::default().error_handler(crate::controllers::something::error_json),
+            )
             .configure(routes::something::register)
     })
     .bind("127.0.0.1:3000")?
