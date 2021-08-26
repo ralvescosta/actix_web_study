@@ -16,7 +16,3 @@ pub async fn something(
     let result = use_case.perform(body.0).await;
     HttpResponse::Ok().json(result)
 }
-
-pub fn error_json(err: JsonPayloadError, req: &HttpRequest) -> Error {
-    error::InternalError::from_response(err, HttpResponse::BadRequest().body("Errou")).into()
-}

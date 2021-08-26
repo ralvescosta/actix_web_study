@@ -30,7 +30,8 @@ async fn main() -> Result<()> {
             .app_data(web::Data::new(Arc::new(something_application)))
             .wrap(middleware::Logger::default())
             .data(
-                web::JsonConfig::default().error_handler(crate::controllers::something::error_json),
+                web::JsonConfig::default()
+                    .error_handler(crate::controllers::error_handler::error_json),
             )
             .configure(routes::something::register)
     })
