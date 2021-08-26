@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'actix_webapi'",
+      "cargo": {
+        "args": [
+          "build",
+          "--bin=actix_webapi",
+          "--package=actix_webapi"
+        ],
+        "filter": {
+          "name": "actix_webapi",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'actix_webapi'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--bin=actix_webapi",
+          "--package=actix_webapi"
+        ],
+        "filter": {
+          "name": "actix_webapi",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
