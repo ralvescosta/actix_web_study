@@ -10,8 +10,7 @@ mod routes;
 mod schema;
 mod view_models;
 
-use actix_http::{Response, ResponseError};
-use actix_web::{error, middleware, web, App, HttpResponse, HttpServer};
+use actix_web::{middleware, web, App, HttpServer};
 use applications::something::SomethingUseCase;
 use env_logger;
 use repositories::something::SomethingRepository;
@@ -31,7 +30,7 @@ async fn main() -> Result<()> {
             .wrap(middleware::Logger::default())
             .data(
                 web::JsonConfig::default()
-                    .error_handler(crate::controllers::error_handler::error_json),
+                    .error_handler(controllers::deserializer_error_handler::handler),
             )
             .configure(routes::something::register)
     })

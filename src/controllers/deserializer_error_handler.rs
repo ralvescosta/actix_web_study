@@ -1,7 +1,7 @@
 use crate::view_models::http_error::HttpError;
 use actix_web::{error, error::JsonPayloadError, Error, HttpRequest, HttpResponse};
 
-pub fn error_json(err: JsonPayloadError, _req: &HttpRequest) -> Error {
+pub fn handler(err: JsonPayloadError, _req: &HttpRequest) -> Error {
     error::InternalError::from_response(
         format!("JSON error: {:?}", err),
         HttpResponse::BadRequest().json(HttpError {
