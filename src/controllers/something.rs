@@ -1,8 +1,6 @@
 use std::sync::Arc;
 
-use actix_web::{
-    error, error::JsonPayloadError, post, web, Error, HttpRequest, HttpResponse, Responder,
-};
+use actix_web::{post, web, HttpResponse, Responder};
 
 use crate::{
     applications::something::SomethingUseCase, view_models::something::SomethingViewModel,
