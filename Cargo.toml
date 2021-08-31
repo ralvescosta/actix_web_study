@@ -17,6 +17,4 @@ diesel = { version = "1.4.7", features = ["sqlite"] }
 dotenv = "0.15.0"
 actix-cors = "0.5.4"
 async-trait = "0.1.51"
-slog = "2.7.0"
-slog-term = "2.8.0"
-slog-async = "2.7.0"
+log = "0.4.14"
